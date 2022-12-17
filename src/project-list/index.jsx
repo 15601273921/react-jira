@@ -1,7 +1,7 @@
 import { SearchPanel } from "./search-panel";
 import { List } from "./list";
 import { useEffect, useState } from "react";
-import { clearObject } from "../utils";
+import { clearObject, useDebounce, useMount } from "../utils";
 import qs from "qs";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -13,23 +13,25 @@ export const ProjectListScreen = () => {
 
   const [list, setList] = useState([]);
 
+  const debouncedParam = useDebounce(param, 200)
+
   useEffect(() => {
     return () => {
-      fetch(`${apiUrl}/projects?${qs.stringify(clearObject(param))}`).then(async res => {
+      fetch(`${apiUrl}/projects?${qs.stringify(clearObject(debouncedParam))}`).then(async res => {
         if (res.ok) {
           setList(await res.json());
         }
       });
     };
-  }, [param]);
+  }, [debouncedParam]);
 
-  useEffect(() => {
+  useMount(() => {
     fetch(`${apiUrl}/users`).then(async res => {
       if (res.ok) {
         setUsers(await res.json());
       }
     });
-  }, []);
+  });
 
   return <div>
     {/*搜索框*/}
