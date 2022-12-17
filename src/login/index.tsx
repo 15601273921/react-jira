@@ -14,10 +14,11 @@ export const LoginScreen = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(param),
     }).then(async (res) => {
+      const json = await res.json();
       if (res.ok) {
-        console.log("登录成功");
+        console.log(json.message);
       } else {
-        console.log("登录失败");
+        console.log(json.message);
       }
     });
   };
