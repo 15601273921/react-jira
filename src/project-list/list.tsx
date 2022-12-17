@@ -1,5 +1,5 @@
+import { User } from "interface/User";
 import React from "react";
-import { User } from "./search-panel";
 
 interface Project {
   id: string;

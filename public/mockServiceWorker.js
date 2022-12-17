@@ -16,7 +16,7 @@ self.addEventListener("install", function () {
   return self.skipWaiting();
 });
 
-self.addEventListener("activate", async function () {
+self.addEventListener("activate", async function (event) {
   return self.clients.claim();
 });
 
@@ -122,7 +122,7 @@ self.addEventListener("fetch", function (event) {
       const reqHeaders = serializeHeaders(request.headers);
       const body = await request.text();
 
-      await sendToClient(client, {
+      const rawClientMessage = await sendToClient(client, {
         type: "REQUEST",
         payload: {
           url: request.url,

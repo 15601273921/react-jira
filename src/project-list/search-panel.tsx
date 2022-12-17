@@ -1,9 +1,5 @@
 import React from "react";
-
-export interface User {
-  id: string;
-  name: string;
-}
+import { User } from "interface/User";
 
 interface SearchPanelProps {
   users: User[];
