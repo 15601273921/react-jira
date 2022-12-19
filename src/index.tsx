@@ -11,11 +11,9 @@ loadDevTools(() => {
     document.getElementById("root") as HTMLElement
   );
   root.render(
-    <React.StrictMode>
-      <AppProviders>
-        <App />
-      </AppProviders>
-    </React.StrictMode>
+    <AppProviders>
+      <App />
+    </AppProviders>
   );
 });
 
